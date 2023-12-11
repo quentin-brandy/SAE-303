@@ -42,7 +42,8 @@ await M.init();
 */
 // creating events in the calendar
 V.uicalendar.createEvents( M.getEvents('mmi1') );
-
+V.uicalendar.createEvents( M.getEvents('mmi2') );
+V.uicalendar.createEvents( M.getEvents('mmi3') );
 
 let previous = document.querySelector('#prev');
 previous.addEventListener('click',() =>  
