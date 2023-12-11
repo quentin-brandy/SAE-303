@@ -1,8 +1,7 @@
 import { M } from "./js/model.js";
 import { V } from "./js/view.js";
 
-window.M = M;
-window.V = V;
+
 /*
    Ce fichier correspond au contrôleur de l'application. Il est chargé de faire le lien entre le modèle et la vue.
    Le modèle et la vue sont définis dans les fichiers js/model.js et js/view.js et importés (M et V, parties "publiques") dans ce fichier.
@@ -40,22 +39,119 @@ await M.init();
   },
 ]
 */
+
 // creating events in the calendar
-V.uicalendar.createEvents( M.getEvents('mmi1') );
-V.uicalendar.createEvents( M.getEvents('mmi2') );
-V.uicalendar.createEvents( M.getEvents('mmi3') );
 
-let previous = document.querySelector('#prev');
-previous.addEventListener('click',() =>  
- V.uicalendar.prev()
- );
+let C = {}
 
-let today = document.querySelector('#today');
- today.addEventListener('click',() =>  
-  V.uicalendar.today()
-  );
+  V.uicalendar.createEvents( M.getEvents('mmi1') );
+  V.uicalendar.createEvents( M.getEvents('mmi2') );
+  V.uicalendar.createEvents( M.getEvents('mmi3') );
 
-let next = document.querySelector('#next');
-next.addEventListener('click',() =>  
- V.uicalendar.next()
- );
+  let eventsmmi1 = M.getEvents('mmi1');
+ for (let event of eventsmmi1) {
+  let changes = {};
+   if (event.title.includes('TP')) {
+       changes.backgroundColor = '#6b66ff' ;
+   }
+  else if (event.title.includes('TD')) {
+      changes.backgroundColor = '#0800e0' ;
+  }
+  else if (event.title.includes('CM')) {
+      changes.backgroundColor =  '#050093'
+  }
+  else{
+      changes.backgroundColor = '#9c99ff';
+  }
+    V.uicalendar.updateEvent(event.id, event.calendarId, changes);
+ }
+
+
+ let eventsmmi2 = M.getEvents('mmi2');
+ for (let event of eventsmmi2) {
+  let changes = {};
+   if (event.title.includes('TP')) {
+       changes.backgroundColor = '#ff1d0a' ;
+   }
+  else if (event.title.includes('TD')) {
+      changes.backgroundColor = '#d11000' ;
+  }
+  else if (event.title.includes('CM')) {
+      changes.backgroundColor =  '#8d0b00'
+  }
+  else{
+      changes.backgroundColor = '#ff6457';
+  }
+    V.uicalendar.updateEvent(event.id, event.calendarId, changes);
+ }
+
+
+
+ let eventsmmi3 = M.getEvents('mmi3');
+ for (let event of eventsmmi3) {
+  let changes = {};
+   if (event.title.includes('TP')) {
+       changes.backgroundColor = '#13fa00' ;
+   }
+  else if (event.title.includes('TD')) {
+      changes.backgroundColor = '#13b800' ;
+  }
+  else if (event.title.includes('CM')) {
+      changes.backgroundColor =  '#095800'
+  }
+  else{
+      changes.backgroundColor = '#6dff61';
+  }
+    V.uicalendar.updateEvent(event.id, event.calendarId, changes);
+ }
+ V.uicalendar.render();
+
+
+ let année = document.querySelector("#annees");
+
+C.handler_clickonSelect = function(ev) {
+  let value = ev.target.value; // ajouter cette ligne
+
+  // switch on the value
+  switch (value) {
+    case "mmi1":
+      // show mmi1 events and hide others
+      V.uicalendar.setCalendarVisibility("mmi1", true);
+      V.uicalendar.setCalendarVisibility("mmi2", false);
+      V.uicalendar.setCalendarVisibility("mmi3", false);
+      break;
+    case "mmi2":
+      // show mmi2 events and hide others
+      V.uicalendar.setCalendarVisibility("mmi1", false);
+      V.uicalendar.setCalendarVisibility("mmi2", true);
+      V.uicalendar.setCalendarVisibility("mmi3", false);
+      break;
+    case "mmi3":
+      // show mmi3 events and hide others
+      V.uicalendar.setCalendarVisibility("mmi1", false);
+      V.uicalendar.setCalendarVisibility("mmi2", false);
+      V.uicalendar.setCalendarVisibility("mmi3", true);
+      break;
+    default:
+      // handle invalid value
+      console.error("Invalid value: " + value);
+  }
+}
+année.addEventListener('change' , C.handler_clickonSelect);
+
+
+let semaine = document.querySelector('#semaine');
+
+C.handler_clickonsemaine = function(ev){
+  if(ev.target.id == "prev"){
+    V.uicalendar.prev();
+  }
+  if(ev.target.id == "today"){
+    V.uicalendar.today();
+  }
+  if(ev.target.id == "next"){
+    V.uicalendar.next();
+  }
+};
+ 
+semaine.addEventListener('click' , C.handler_clickonsemaine);
