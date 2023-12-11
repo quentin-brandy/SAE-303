@@ -3,6 +3,13 @@ import '@toast-ui/calendar/dist/toastui-calendar.min.css';
 
 let V = {};
 
+V.handler_clickOncatonsemaine = function(ev) {
+  if (ev.target.id === "PREV") {
+    console.log(ev);
+    V.uicalendar.next();
+  }
+};
+
 V.uicalendar = new Calendar('#calendar', {
   defaultView: 'week',
   isReadOnly: true,

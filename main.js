@@ -2,7 +2,7 @@ import { M } from "./js/model.js";
 import { V } from "./js/view.js";
 
 window.M = M;
-window.V + V;
+window.V = V;
 /*
    Ce fichier correspond au contrôleur de l'application. Il est chargé de faire le lien entre le modèle et la vue.
    Le modèle et la vue sont définis dans les fichiers js/model.js et js/view.js et importés (M et V, parties "publiques") dans ce fichier.
@@ -42,3 +42,19 @@ await M.init();
 */
 // creating events in the calendar
 V.uicalendar.createEvents( M.getEvents('mmi1') );
+
+
+let previous = document.querySelector('#prev');
+previous.addEventListener('click',() =>  
+ V.uicalendar.prev()
+ );
+
+let today = document.querySelector('#today');
+ today.addEventListener('click',() =>  
+  V.uicalendar.today()
+  );
+
+let next = document.querySelector('#next');
+next.addEventListener('click',() =>  
+ V.uicalendar.next()
+ );
