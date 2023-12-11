@@ -9,7 +9,7 @@
   
     <div>
       <header>
-        <nav>
+        <nav id="semaine-content">
          <button id="prev">
           semaine dernière
          </button>
@@ -19,13 +19,18 @@
          <button id="next">
           semaine prochaine
          </button>
+         <select name="années" id="annees">
+          <option value="mmi1">MMI1</option>
+          <option value="mmi2">MMI2</option>
+          <option value="mmi3">MMI3</option>
+         </select>
         </nav>
       </header>
 
       <main id="calendar" style="height: 800px"></main>
     </div>
 
-    <script type="module" src="/main.js"></script>
+    <script type="module" src="main.js"></script>
     
   </body>
 </html>
