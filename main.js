@@ -44,9 +44,9 @@ await M.init();
 
 let C = {}
 
-  V.uicalendar.createEvents( M.getEvents('mmi1') );
-  V.uicalendar.createEvents( M.getEvents('mmi2') );
-  V.uicalendar.createEvents( M.getEvents('mmi3') );
+V.uicalendar.createEvents( M.getEvents('mmi1') );
+V.uicalendar.createEvents( M.getEvents('mmi2') );
+V.uicalendar.createEvents( M.getEvents('mmi3') );
 
   let eventsmmi1 = M.getEvents('mmi1');
  for (let event of eventsmmi1) {
@@ -107,38 +107,6 @@ let C = {}
  V.uicalendar.render();
 
 
- /*let année = document.querySelector("#annees");
-
-C.handler_clickonSelect = function(ev) {
-  let value = ev.target.value; // ajouter cette ligne
-
-  // switch on the value
-  switch (value) {
-    case "mmi1":
-      // show mmi1 events and hide others
-      V.uicalendar.setCalendarVisibility("mmi1", true);
-      V.uicalendar.setCalendarVisibility("mmi2", false);
-      V.uicalendar.setCalendarVisibility("mmi3", false);
-      break;
-    case "mmi2":
-      // show mmi2 events and hide others
-      V.uicalendar.setCalendarVisibility("mmi1", false);
-      V.uicalendar.setCalendarVisibility("mmi2", true);
-      V.uicalendar.setCalendarVisibility("mmi3", false);
-      break;
-    case "mmi3":
-      // show mmi3 events and hide others
-      V.uicalendar.setCalendarVisibility("mmi1", false);
-      V.uicalendar.setCalendarVisibility("mmi2", false);
-      V.uicalendar.setCalendarVisibility("mmi3", true);
-      break;
-    default:
-      // handle invalid value
-      console.error("Invalid value: " + value);
-  }
-}
-année.addEventListener('change' , C.handler_clickonSelect);*/
-
 
 let semaine = document.querySelector('#semaine');
 
@@ -183,3 +151,108 @@ else if(ev.target.id == "mmi3" && ev.target.checked == false){
 };
 
 année.addEventListener('click' , C.handler_clickoncheckbox);
+
+
+    // itération 5 
+
+let select = document.getElementById("groupe");
+let checkbox1 = document.getElementById("mmi1");
+let checkbox2 = document.getElementById("mmi2");
+let checkbox3 = document.getElementById("mmi3");
+
+checkbox1.addEventListener("change", function(){
+  for(let i = 0; i < select.options.length; i++){
+    let option = select.options[i];
+    let dataid = option.getAttribute("data-id");
+    if(dataid == "BUT1"){
+      if(checkbox1.checked){
+        option.style.display = "block";
+      }
+      else{
+        option.style.display = "none";
+      }
+    }
+}
+}
+);
+
+checkbox2.addEventListener("change", function(){
+  for(let i = 0; i < select.options.length; i++){
+    let option = select.options[i];
+    let dataid = option.getAttribute("data-id");
+    if(dataid == "BUT2"){
+      if(checkbox2.checked){
+        option.style.display = "block";
+      }
+      else{
+        option.style.display = "none";
+      }
+    }
+}
+}
+);
+
+checkbox3.addEventListener("change", function(){
+  for(let i = 0; i < select.options.length; i++){
+    let option = select.options[i];
+    let dataid = option.getAttribute("data-id");
+    if(dataid == "BUT3"){
+      if(checkbox3.checked){
+        option.style.display = "block";
+      }
+      else{
+        option.style.display = "none";
+      }
+    }
+}
+}
+);
+
+
+
+let groupe = document.querySelector("#groupe");
+
+
+C.handler_selectgroupe = function(ev){
+  let groupe = ev.target.value;
+  if(groupe.includes('BUT1')){
+    for (let event of eventsmmi1) {
+      let changes = {};
+      if (event.groupe.includes(groupe)) {
+        changes.isVisible = true;
+    }
+    else {
+      changes.isVisible = false;
+    }
+    V.uicalendar.updateEvent(event.id, event.calendarId, changes);
+  }
+  }
+  if(groupe.includes('BUT2')){
+    for (let event of eventsmmi2) {
+      let changes = {};
+      if (event.groupe.includes(groupe)) {
+        changes.isVisible = true;
+    }
+    else {
+      changes.isVisible = false;
+    }
+    V.uicalendar.updateEvent(event.id, event.calendarId, changes);
+  }
+  }
+  if(groupe.includes('BUT3')){
+    for (let event of eventsmmi3) {
+      let changes = {};
+      if (event.groupe.includes(groupe)) {
+        changes.isVisible = true;
+    }
+    else {
+      changes.isVisible = false;
+    }
+    V.uicalendar.updateEvent(event.id, event.calendarId, changes);
+  }
+  }
+};
+
+
+
+groupe.addEventListener('change' , C.handler_selectgroupe);
