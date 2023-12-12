@@ -28,7 +28,5 @@ V.uicalendar = new Calendar('#calendar', {
 });
 
 
-
-
 export { V };
 

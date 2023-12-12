@@ -48,6 +48,7 @@ V.uicalendar.createEvents( M.getEvents('mmi1') );
 V.uicalendar.createEvents( M.getEvents('mmi2') );
 V.uicalendar.createEvents( M.getEvents('mmi3') );
 
+
   let eventsmmi1 = M.getEvents('mmi1');
  for (let event of eventsmmi1) {
   let changes = {};
@@ -130,23 +131,11 @@ let année = document.querySelector("#annees");
 
 
 C.handler_clickoncheckbox = function(ev){
-if(ev.target.id == "mmi1" && ev.target.checked){
-  V.uicalendar.setCalendarVisibility("mmi1", true);
+if(ev.target.checked){
+  V.uicalendar.createEvents( M.getEvents(ev.target.id) );
 }
-else if( ev.target.id == "mmi1" && ev.target.checked == false){
-  V.uicalendar.setCalendarVisibility("mmi1", false);
-}
-if(ev.target.id == "mmi2" && ev.target.checked){
-  V.uicalendar.setCalendarVisibility("mmi2", true);
-}
-else if(ev.target.id == "mmi2" && ev.target.checked == false){
-  V.uicalendar.setCalendarVisibility("mmi2", false);
-}
-if(ev.target.id == "mmi3" && ev.target.checked){
-  V.uicalendar.setCalendarVisibility("mmi3", true);
-}
-else if(ev.target.id == "mmi3" && ev.target.checked == false){
-  V.uicalendar.setCalendarVisibility("mmi3", false);
+else if(  ev.target.checked == false){
+  V.uicalendar.setCalendarVisibility(ev.target.id, false);
 }
 };
 
@@ -208,51 +197,53 @@ checkbox3.addEventListener("change", function(){
 }
 );
 
-
-
-let groupe = document.querySelector("#groupe");
-
+let test = function(){
+  let select = document.getElementById("groupe");
+  let groupe = select.value;
+  console.log(groupe);
+  let events = M.getallevents();
+  console.log(events);
+  let filteredEvents = events.filter(event => event.groupe.includes(groupe));
+  console.log(filteredEvents);
+  return filteredEvents;
+  };
 
 C.handler_selectgroupe = function(ev){
-  let groupe = ev.target.value;
-  if(groupe.includes('BUT1')){
-    for (let event of eventsmmi1) {
-      let changes = {};
-      if (event.groupe.includes(groupe)) {
-        changes.isVisible = true;
-    }
-    else {
-      changes.isVisible = false;
-    }
-    V.uicalendar.updateEvent(event.id, event.calendarId, changes);
-  }
-  }
-  if(groupe.includes('BUT2')){
-    for (let event of eventsmmi2) {
-      let changes = {};
-      if (event.groupe.includes(groupe)) {
-        changes.isVisible = true;
-    }
-    else {
-      changes.isVisible = false;
-    }
-    V.uicalendar.updateEvent(event.id, event.calendarId, changes);
-  }
-  }
-  if(groupe.includes('BUT3')){
-    for (let event of eventsmmi3) {
-      let changes = {};
-      if (event.groupe.includes(groupe)) {
-        changes.isVisible = true;
-    }
-    else {
-      changes.isVisible = false;
-    }
-    V.uicalendar.updateEvent(event.id, event.calendarId, changes);
-  }
-  }
+let groupe = ev.target.value;
+let events = M.getallevents();
+let filteredEvents = events.filter(event => event.groupe.includes(groupe));
+console.log(filteredEvents);
+V.uicalendar.clear();
+V.uicalendar.createEvents(filteredEvents);
+if(groupe =="0"){
+  V.uicalendar.createEvents(events);
+}
+return filteredEvents;
 };
 
 
+select.addEventListener('change' , C.handler_selectgroupe);
 
-groupe.addEventListener('change' , C.handler_selectgroupe);
+
+//itération 6
+let search = document.querySelector("#search");
+
+C.handler_search = function(ev){
+let select = document.getElementById("groupe");
+let value = select.value;
+let recherche = M.search(ev); 
+let groupe = test();
+let allevent = M.getallevents();
+if(value === "0"){
+  let filteredsearch = allevent.filter(event => event.title.toLowerCase().includes(recherche) || event.location.toLowerCase().includes(recherche));
+  V.uicalendar.clear();
+  V.uicalendar.createEvents(filteredsearch);
+}
+else{
+let filteredsearch = groupe.filter(event => event.title.toLowerCase().includes(recherche) || event.location.toLowerCase().includes(recherche));
+V.uicalendar.clear();
+V.uicalendar.createEvents(filteredsearch);
+}
+
+}
+search.addEventListener('keyup' , C.handler_search);
