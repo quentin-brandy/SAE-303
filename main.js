@@ -107,7 +107,7 @@ let C = {}
  V.uicalendar.render();
 
 
- let année = document.querySelector("#annees");
+ /*let année = document.querySelector("#annees");
 
 C.handler_clickonSelect = function(ev) {
   let value = ev.target.value; // ajouter cette ligne
@@ -137,7 +137,7 @@ C.handler_clickonSelect = function(ev) {
       console.error("Invalid value: " + value);
   }
 }
-année.addEventListener('change' , C.handler_clickonSelect);
+année.addEventListener('change' , C.handler_clickonSelect);*/
 
 
 let semaine = document.querySelector('#semaine');
@@ -155,3 +155,31 @@ C.handler_clickonsemaine = function(ev){
 };
  
 semaine.addEventListener('click' , C.handler_clickonsemaine);
+
+
+let année = document.querySelector("#annees");
+
+
+
+C.handler_clickoncheckbox = function(ev){
+if(ev.target.id == "mmi1" && ev.target.checked){
+  V.uicalendar.setCalendarVisibility("mmi1", true);
+}
+else if( ev.target.id == "mmi1" && ev.target.checked == false){
+  V.uicalendar.setCalendarVisibility("mmi1", false);
+}
+if(ev.target.id == "mmi2" && ev.target.checked){
+  V.uicalendar.setCalendarVisibility("mmi2", true);
+}
+else if(ev.target.id == "mmi2" && ev.target.checked == false){
+  V.uicalendar.setCalendarVisibility("mmi2", false);
+}
+if(ev.target.id == "mmi3" && ev.target.checked){
+  V.uicalendar.setCalendarVisibility("mmi3", true);
+}
+else if(ev.target.id == "mmi3" && ev.target.checked == false){
+  V.uicalendar.setCalendarVisibility("mmi3", false);
+}
+};
+
+année.addEventListener('click' , C.handler_clickoncheckbox);
