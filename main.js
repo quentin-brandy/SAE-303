@@ -225,25 +225,25 @@ return filteredEvents;
 select.addEventListener('change' , C.handler_selectgroupe);
 
 
-//itération 6
+//itération 7
 let search = document.querySelector("#search");
-
 C.handler_search = function(ev){
-let select = document.getElementById("groupe");
-let value = select.value;
-let recherche = M.search(ev); 
-let groupe = test();
-let allevent = M.getallevents();
-if(value === "0"){
-  let filteredsearch = allevent.filter(event => event.title.toLowerCase().includes(recherche) || event.location.toLowerCase().includes(recherche));
+  let select = document.getElementById("groupe");
+  let value = select.value;
+  let recherche = M.search(ev);
+  let groupe = test();
+  let allevent = M.getallevents();
+  if(value === "0"){
+    let filteredsearch = allevent.filter(event =>  recherche.every(recherche => event.title.toLowerCase().includes(recherche) || event.location.toLowerCase().includes(recherche)));
+    V.uicalendar.clear();
+    V.uicalendar.createEvents(filteredsearch);
+  }
+  else{
+  let filteredsearch = groupe.filter(event =>  recherche.every(recherche => event.title.toLowerCase().includes(recherche) || event.location.toLowerCase().includes(recherche)));
   V.uicalendar.clear();
   V.uicalendar.createEvents(filteredsearch);
-}
-else{
-let filteredsearch = groupe.filter(event => event.title.toLowerCase().includes(recherche) || event.location.toLowerCase().includes(recherche));
-V.uicalendar.clear();
-V.uicalendar.createEvents(filteredsearch);
-}
+  }
+  
+  }
 
-}
 search.addEventListener('keyup' , C.handler_search);

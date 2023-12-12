@@ -36,17 +36,14 @@ M.init = async function() {
     Events.mmi3.addEvents(data3);
 };
 
-M.Getinput = function(input){
-let search = input.value;
-return search;
-}
 M.getallevents = function(){
    let all = M.getEvents('mmi1').concat(M.getEvents('mmi2'), M.getEvents('mmi3'));
    return all;
 }
 M.search = function(ev){
     let recherche = ev.target.value.toLowerCase();
-    return recherche;
+    let mots = recherche.split(" ");
+    return mots;
 }
 export { M };
 
