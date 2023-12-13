@@ -33,6 +33,12 @@ V.init = function(){
 
   let search = document.querySelector("#search");
   search.addEventListener('input' , C.handler_search);
+
+  let searchanne = document.querySelector("#annees");
+  searchanne.addEventListener('click' , C.handler_annee);
+
+  let dispo = document.getElementById('disposition')
+  dispo.addEventListener('click', C.handler_disposition); 
 }
 
 let C = {}
@@ -55,7 +61,6 @@ C.handler_clickonsemaine = function(ev){
 
 C.handler_clickoncheckbox = function(ev){
   let search = document.querySelector("#search");
-if(search.value === ""){
 if(ev.target.checked){
   let event = M.getEvents(ev.target.id)
   V.uicalendar.createEvents( event );
@@ -63,20 +68,13 @@ if(ev.target.checked){
 else if(  ev.target.checked == false){
   V.uicalendar.setCalendarVisibility(ev.target.id, false);
 }
-}
-else{
-  
-}
 };
 
 
 
 
+
     // itération 5 
-
-    let search = document.querySelector("#annees");
-
-
     C.handler_annee = function(ev){
       let select = document.getElementById("groupe");
       for(let i = 0; i < select.options.length; i++){
@@ -93,7 +91,7 @@ else{
     }
     }
    
-    search.addEventListener('click' , C.handler_annee);
+   
 
 
 let test = function(){
@@ -128,7 +126,7 @@ else{
 
 let searchfonction = function(search){
   let value = search.value;
-  let recherche = value.toLowerCase().split(" ");
+  let recherche = M.search2(value);
   let groupe = test();
   let allevent = M.getallevents();
   if(value === "0"){
@@ -166,5 +164,27 @@ C.handler_search = function(ev){
   }
   
   }
+
+// itération 8
+
+
+C.handler_disposition = function(ev) {
+  let button = ev.target;
+  let id = button.id;
+
+  switch (id) {
+    case 'jour':
+      V.uicalendar.changeView('day');
+      break;
+    case 'semaine':
+      V.uicalendar.changeView('week');
+      break;
+    case 'mois':
+      V.uicalendar.changeView('month');
+      break;
+  }
+};
+
+
 
 V.init();

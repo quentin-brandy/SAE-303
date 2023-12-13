@@ -44,6 +44,11 @@ M.search = function(ev){
     let recherche = ev.target.value.toLowerCase().split(" ");
     return recherche;
 }
+
+M.search2 = function(value){
+    let recherche = value.toLowerCase().split(" ");
+    return recherche;
+}
 export { M };
 
 
