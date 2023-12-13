@@ -41,9 +41,8 @@ M.getallevents = function(){
    return all;
 }
 M.search = function(ev){
-    let recherche = ev.target.value.toLowerCase();
-    let mots = recherche.split(" ");
-    return mots;
+    let recherche = ev.target.value.toLowerCase().split(" ");
+    return recherche;
 }
 export { M };
 

@@ -24,7 +24,6 @@ V.uicalendar = new Calendar('#calendar', {
     }
   },
  
- 
 });
 
 

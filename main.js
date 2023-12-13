@@ -19,97 +19,26 @@ import { V } from "./js/view.js";
 // loadind data (and wait for it !)
 await M.init();
 
-// sample events for testing
-/*let edt = [
-  {
-    id: '1',
-    calendarId: '1',
-    title: 'my event',
-    category: 'time',
-    start: '2023-12-11T08:30:00',
-    end: '2023-12-11T10:30:00',
-  },
-  {
-    id: '2',
-    calendarId: '1',
-    title: 'second event',
-    category: 'time',
-    start: '2023-12-13T14:00:00',
-    end: '2023-12-13T15:30:00',
-  },
-]
-*/
-
 // creating events in the calendar
+
+V.init = function(){
+  let semaine = document.querySelector('#semaine');
+  semaine.addEventListener('click' , C.handler_clickonsemaine);
+
+  let année = document.querySelector("#annees");
+  année.addEventListener('click' , C.handler_clickoncheckbox);
+
+  let select = document.getElementById("groupe");
+  select.addEventListener('change' , C.handler_selectgroupe);
+
+  let search = document.querySelector("#search");
+  search.addEventListener('input' , C.handler_search);
+}
 
 let C = {}
 
-V.uicalendar.createEvents( M.getEvents('mmi1') );
-V.uicalendar.createEvents( M.getEvents('mmi2') );
-V.uicalendar.createEvents( M.getEvents('mmi3') );
+V.uicalendar.createEvents( M.getallevents() );
 
-
-  let eventsmmi1 = M.getEvents('mmi1');
- for (let event of eventsmmi1) {
-  let changes = {};
-   if (event.title.includes('TP')) {
-       changes.backgroundColor = '#6b66ff' ;
-   }
-  else if (event.title.includes('TD')) {
-      changes.backgroundColor = '#0800e0' ;
-  }
-  else if (event.title.includes('CM')) {
-      changes.backgroundColor =  '#050093'
-  }
-  else{
-      changes.backgroundColor = '#9c99ff';
-  }
-    V.uicalendar.updateEvent(event.id, event.calendarId, changes);
- }
-
-
- let eventsmmi2 = M.getEvents('mmi2');
- for (let event of eventsmmi2) {
-  let changes = {};
-   if (event.title.includes('TP')) {
-       changes.backgroundColor = '#ff1d0a' ;
-   }
-  else if (event.title.includes('TD')) {
-      changes.backgroundColor = '#d11000' ;
-  }
-  else if (event.title.includes('CM')) {
-      changes.backgroundColor =  '#8d0b00'
-  }
-  else{
-      changes.backgroundColor = '#ff6457';
-  }
-    V.uicalendar.updateEvent(event.id, event.calendarId, changes);
- }
-
-
-
- let eventsmmi3 = M.getEvents('mmi3');
- for (let event of eventsmmi3) {
-  let changes = {};
-   if (event.title.includes('TP')) {
-       changes.backgroundColor = '#13fa00' ;
-   }
-  else if (event.title.includes('TD')) {
-      changes.backgroundColor = '#13b800' ;
-  }
-  else if (event.title.includes('CM')) {
-      changes.backgroundColor =  '#095800'
-  }
-  else{
-      changes.backgroundColor = '#6dff61';
-  }
-    V.uicalendar.updateEvent(event.id, event.calendarId, changes);
- }
- V.uicalendar.render();
-
-
-
-let semaine = document.querySelector('#semaine');
 
 C.handler_clickonsemaine = function(ev){
   if(ev.target.id == "prev"){
@@ -123,79 +52,49 @@ C.handler_clickonsemaine = function(ev){
   }
 };
  
-semaine.addEventListener('click' , C.handler_clickonsemaine);
-
-
-let année = document.querySelector("#annees");
-
-
 
 C.handler_clickoncheckbox = function(ev){
+  let search = document.querySelector("#search");
+if(search.value === ""){
 if(ev.target.checked){
-  V.uicalendar.createEvents( M.getEvents(ev.target.id) );
+  let event = M.getEvents(ev.target.id)
+  V.uicalendar.createEvents( event );
 }
 else if(  ev.target.checked == false){
   V.uicalendar.setCalendarVisibility(ev.target.id, false);
 }
+}
+else{
+  
+}
 };
 
-année.addEventListener('click' , C.handler_clickoncheckbox);
+
 
 
     // itération 5 
 
-let select = document.getElementById("groupe");
-let checkbox1 = document.getElementById("mmi1");
-let checkbox2 = document.getElementById("mmi2");
-let checkbox3 = document.getElementById("mmi3");
+    let search = document.querySelector("#annees");
 
-checkbox1.addEventListener("change", function(){
-  for(let i = 0; i < select.options.length; i++){
-    let option = select.options[i];
-    let dataid = option.getAttribute("data-id");
-    if(dataid == "BUT1"){
-      if(checkbox1.checked){
-        option.style.display = "block";
-      }
-      else{
-        option.style.display = "none";
-      }
-    }
-}
-}
-);
 
-checkbox2.addEventListener("change", function(){
-  for(let i = 0; i < select.options.length; i++){
-    let option = select.options[i];
-    let dataid = option.getAttribute("data-id");
-    if(dataid == "BUT2"){
-      if(checkbox2.checked){
-        option.style.display = "block";
-      }
-      else{
-        option.style.display = "none";
-      }
+    C.handler_annee = function(ev){
+      let select = document.getElementById("groupe");
+      for(let i = 0; i < select.options.length; i++){
+        let option = select.options[i];
+        let dataid = option.getAttribute("data-id");
+        if(dataid == "BUT1"){
+          if(ev.target.checked){
+            option.style.display = "block";
+          }
+          else{
+            option.style.display = "none";
+          }
+        }
     }
-}
-}
-);
+    }
+   
+    search.addEventListener('click' , C.handler_annee);
 
-checkbox3.addEventListener("change", function(){
-  for(let i = 0; i < select.options.length; i++){
-    let option = select.options[i];
-    let dataid = option.getAttribute("data-id");
-    if(dataid == "BUT3"){
-      if(checkbox3.checked){
-        option.style.display = "block";
-      }
-      else{
-        option.style.display = "none";
-      }
-    }
-}
-}
-);
 
 let test = function(){
   let select = document.getElementById("groupe");
@@ -213,20 +112,42 @@ let groupe = ev.target.value;
 let events = M.getallevents();
 let filteredEvents = events.filter(event => event.groupe.includes(groupe));
 console.log(filteredEvents);
+let search = document.querySelector("#search");
+if(search.value === ""){
 V.uicalendar.clear();
 V.uicalendar.createEvents(filteredEvents);
 if(groupe =="0"){
   V.uicalendar.createEvents(events);
 }
-return filteredEvents;
+}
+else{
+ searchfonction(search);
+
+  }
 };
 
+let searchfonction = function(search){
+  let value = search.value;
+  let recherche = value.toLowerCase().split(" ");
+  let groupe = test();
+  let allevent = M.getallevents();
+  if(value === "0"){
+    let filteredsearch = allevent.filter(event =>  recherche.every(recherche => event.title.toLowerCase().includes(recherche) || event.location.toLowerCase().includes(recherche)));
+    V.uicalendar.clear();
+    V.uicalendar.createEvents(filteredsearch);
+  }
+  else{
+  let filteredsearch = groupe.filter(event =>  recherche.every(recherche => event.title.toLowerCase().includes(recherche) || event.location.toLowerCase().includes(recherche)));
+  V.uicalendar.clear();
+  V.uicalendar.createEvents(filteredsearch);
+  }
+}
 
-select.addEventListener('change' , C.handler_selectgroupe);
 
 
-//itération 7
-let search = document.querySelector("#search");
+
+//itération 6 et 7
+
 C.handler_search = function(ev){
   let select = document.getElementById("groupe");
   let value = select.value;
@@ -246,4 +167,4 @@ C.handler_search = function(ev){
   
   }
 
-search.addEventListener('keyup' , C.handler_search);
+V.init();

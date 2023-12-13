@@ -8,19 +8,41 @@ class Event {
     #end;
     #location;
     #groups;
+    #year;
+    #calendarColours = {
+        mmi1: {
+          CM: "#6b66ff",
+          TD: "#0800e0",
+          TP: "#050093",
+          Default: "#9c99ff",
+        },
+        mmi2: {
+          CM: "#13fa00",
+          TD: "#13b800",
+          TP: "#095800",
+          Default: "#6dff61",
+        },
+        mmi3: {
+          CM: "#ff1d0a",
+          TD: "#d11000",
+          TP: "#8d0b00",
+          Default: "#ff6457",
+        },
+      };
 
-    constructor(id, summary, description, start, end, location) {
+    constructor(id, summary, description, start, end, location , year) {
         this.#id = id;
         this.#summary = summary.slice(0, summary.lastIndexOf(','));
         this.#description = description;
         this.#start = new Date(start);
         this.#end = new Date(end);
         this.#location = location;
-
         this.#groups = summary.slice(summary.lastIndexOf(',')+1);
         this.#groups = this.#groups.split('.');
         this.#groups = this.#groups.map( gr => gr.replace(/\s/g, "") );
+        this.#year = year;
     }
+
 
     get id() {
         return this.#id;
@@ -49,7 +71,21 @@ class Event {
     get groups() {
         return this.#groups.map( gr => gr); // retourne une copie du tableau
     }
-
+    get colour() {
+        const allColours = {
+          TP: this.#calendarColours[this.#year].TP,
+          TD: this.#calendarColours[this.#year].TD,
+          CM: this.#calendarColours[this.#year].CM,
+          Default: this.#calendarColours[this.#year].Default,
+        }
+    
+        for (let individualColor in allColours) {
+          if (this.#summary.includes(individualColor)) {
+            return allColours[individualColor];
+          }
+        }
+        return allColours.Default;
+      };
     // retourne un objet contenant les informations de l'événement
     // dans un format compatible avec Toast UI Calendar (voir https://nhn.github.io/tui.calendar/latest/EventObject)
     toObject() {
@@ -60,6 +96,8 @@ class Event {
             start: this.#start,
             end: this.#end,
             location: this.#location, 
+            backgroundColor: this.colour,
+            borderColor: this.colour,
             groupe: this.#groups
         }
     }

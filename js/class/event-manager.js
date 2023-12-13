@@ -28,7 +28,7 @@ class EventManager {
     addEvents(events) {
         for(let uid in events) {
             let event = events[uid];
-            this.#events.push(new Event(uid, event.summary, event.description, event.start, event.end, event.location));
+            this.#events.push(new Event(uid, event.summary, event.description, event.start, event.end, event.location , this.#id));
         }
     }   
 
