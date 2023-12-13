@@ -70,5 +70,40 @@ V.Presentevent = function(events){
   return filteredEvents;
   };
 
+  V.checked = function(groupe){
+    let mmi = [document.querySelector("#BUT1") , document.querySelector("#BUT2") , document.querySelector("#BUT3") ];
+    if(groupe.includes("BUT1")){
+      mmi[0].checked = true;
+      mmi[1].checked = false;
+      mmi[2].checked = false;
+    }
+    else if(groupe.includes("BUT2")){
+      mmi[0].checked = false;
+      mmi[1].checked = true;
+      mmi[2].checked = false;
+    }
+    else if(groupe.includes("BUT3")){
+      mmi[0].checked = false;
+      mmi[1].checked = false;
+      mmi[2].checked = true;
+    }
+  }
+
+  V.localevent = function(mmi1 ,mmi2 , mmi3){
+    let mmi = [];
+  if (mmi1 != null) {
+    mmi.push(mmi1);
+  }
+  if (mmi2 != null) {
+    mmi.push(mmi2);
+  }
+  if (mmi3 != null) {
+    mmi.push(mmi3);
+  }
+  V.uicalendar.clear();
+  for (let event of mmi) {
+    V.uicalendar.createEvents(event);
+  }
+}
 export { V };
 

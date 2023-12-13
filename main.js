@@ -34,8 +34,8 @@ V.init = function(){
   let search = document.querySelector("#search");
   search.addEventListener('input' , C.handler_search);
 
-  let searchanne = document.querySelector("#annees");
-  searchanne.addEventListener('click' , C.handler_annee);
+ 
+  année.addEventListener('click' , C.handler_annee);
 
   let dispo = document.getElementById('disposition')
   dispo.addEventListener('click', C.handler_disposition); 
@@ -45,6 +45,7 @@ let C = {}
 
 V.uicalendar.createEvents( M.getallevents() );
 
+ // handler pour le changer de jour / semaine / mois
 
 C.handler_clickonsemaine = function(ev){
   if(ev.target.id == "prev"){
@@ -57,7 +58,8 @@ C.handler_clickonsemaine = function(ev){
     V.uicalendar.next();
   }
 };
- 
+
+ // handler pour la séléction de l'année de formation
 
 C.handler_clickoncheckbox = function(ev){
 if(ev.target.checked){
@@ -67,6 +69,7 @@ if(ev.target.checked){
 else if(  ev.target.checked == false){
   V.uicalendar.setCalendarVisibility(ev.target.name, false);
 }
+localStorage.setItem(ev.target.name, ev.target.checked);
 };
 
 
@@ -74,6 +77,9 @@ else if(  ev.target.checked == false){
 
 
     // itération 5 
+
+// handler pour la séléction de l'année de formation
+
     C.handler_annee = function(ev){
       let select = document.getElementById("groupe");
       for(let i = 0; i < select.options.length; i++){
@@ -90,9 +96,12 @@ else if(  ev.target.checked == false){
     }
     }
    
-
-C.handler_selectgroupe = function(ev){
-let groupe = ev.target.value;
+// handler pour la séléction des optionsa afficher dans le sélécteur ainsi qu ecréation des évènements à afficher en fonction du sélécteur
+C.handler_selectgroupe = function(){
+let mmi = [document.querySelector("#BUT1") , document.querySelector("#BUT2") , document.querySelector("#BUT3") ];
+let select = document.getElementById("groupe");
+let groupe = select.value;
+V.checked(groupe);
 let events = M.getallevents();
 let filteredEvents = events.filter(event => event.groupe.includes(groupe));
 console.log(filteredEvents);
@@ -102,36 +111,26 @@ V.uicalendar.clear();
 V.uicalendar.createEvents(filteredEvents);
 if(groupe =="0"){
   V.uicalendar.createEvents(events);
+  mmi[0].checked = true;
+  mmi[1].checked = true;
+  mmi[2].checked = true;
+  for(let i = 0; i < select.options.length; i++){
+    let option = select.options[i];
+    option.style.display = "block";
+  }
+  localStorage.setItem("mmi1", "true");
+  localStorage.setItem("mmi2", "true");
+  localStorage.setItem("mmi3", "true");
 }
 }
 else{
  searchfonction(search);
-
   }
+  localStorage.setItem("filtre", groupe);
 };
 
-let searchfonction = function(search){
-  let value = search.value;
-  let recherche = M.search2(value);
-  let allevent = M.getallevents();
-  let groupe = V.Presentevent(allevent);
-  if(value === "0"){
-    let filteredsearch = allevent.filter(event =>  recherche.every(recherche => event.title.toLowerCase().includes(recherche) || event.location.toLowerCase().includes(recherche)));
-    V.uicalendar.clear();
-    V.uicalendar.createEvents(filteredsearch);
-  }
-  else{
-  let filteredsearch = groupe.filter(event =>  recherche.every(recherche => event.title.toLowerCase().includes(recherche) || event.location.toLowerCase().includes(recherche)));
-  V.uicalendar.clear();
-  V.uicalendar.createEvents(filteredsearch);
-  }
-}
-
-
-
-
 //itération 6 et 7
-
+// handler pour rechercher les évènemetn en fonction de se qui est tapé dans la barre de recherche
 C.handler_search = function(ev){
   let select = document.getElementById("groupe");
   let value = select.value;
@@ -153,32 +152,112 @@ C.handler_search = function(ev){
 
 // itération 8
 
+// handler pour changer  la vue
 
 C.handler_disposition = function(ev) {
   let button = ev.target;
   let id = button.id;
 
   switch (id) {
-    case 'jour':
+    case 'day':
       V.uicalendar.changeView('day');
       break;
-    case 'semaine':
+    case 'week':
       V.uicalendar.changeView('week');
       break;
-    case 'mois':
+    case 'month':
       V.uicalendar.changeView('month');
-      
       break;
   }
+  localStorage.setItem("format", id);
 };
 
 // itération 9 
-
+// version men jour pour mobile
 if (window.devicePixelRatio > 2) {
   V.uicalendar.changeView('day');
 }
 
 
+// itération 10 
+
+// établissement des evènements a affiché en fonction du sélécteur d'après le localstorage
+let selectandformatidentifier = function() {
+let select = document.getElementById("groupe");
+let cat = localStorage.getItem("filtre");
+for (let i = 1; i < select.options.length; i++) {
+  let option = select.options[i];
+  if (option.value == cat) {
+    option.selected = true;
+    C.handler_selectgroupe();
+    break;
+    
+  }
+}
+let format = localStorage.getItem("format");
+V.uicalendar.changeView(format);
+}
+
+
+// Fonction de recherche d'évènements
+let searchfonction = function(search){
+  let value = search.value;
+  let recherche = M.search2(value);
+  let allevent = M.getallevents();
+  let groupe = V.Presentevent(allevent);
+  if(value === "0"){
+    let filteredsearch = allevent.filter(event =>  recherche.every(recherche => event.title.toLowerCase().includes(recherche) || event.location.toLowerCase().includes(recherche)));
+    V.uicalendar.clear();
+    V.uicalendar.createEvents(filteredsearch);
+  }
+  else{
+  let filteredsearch = groupe.filter(event =>  recherche.every(recherche => event.title.toLowerCase().includes(recherche) || event.location.toLowerCase().includes(recherche)));
+  V.uicalendar.clear();
+  V.uicalendar.createEvents(filteredsearch);
+  }
+}
+
+
+
+
+// établissement de la valeur des checkbox d'après le localstorage
+let checkboxvalue = function(){
+let select = document.getElementById("groupe");
+let checkboxmmi1 = localStorage.getItem("mmi1");
+let checkboxmmi2 = localStorage.getItem("mmi2");
+let checkboxmmi3 = localStorage.getItem("mmi3");
+let checkboxid = [document.querySelector("#BUT1"), document.querySelector("#BUT2"), document.querySelector("#BUT3")];
+if (select.value === "0") {
+  var mmi1event, mmi2event, mmi3event;
+  if (checkboxmmi1 == "true") {
+    mmi1event = M.getEvents("mmi1");
+  }
+  else{
+    checkboxid[0].checked = false;
+  }
+  if (checkboxmmi2 == "true") {
+    mmi2event = M.getEvents("mmi2");
+  }
+  else{
+    checkboxid[1].checked = false;
+    }
+  if (checkboxmmi3 == "true") {
+    mmi3event = M.getEvents("mmi3");
+  }
+  else{
+    checkboxid[2].checked = false;
+    }
+    V.localevent(mmi1event , mmi2event , mmi3event);
+  
+}
+}
+
+
+let preference = function(){
+  checkboxvalue();
+  selectandformatidentifier();
+};
 
 
 V.init();
+preference();
