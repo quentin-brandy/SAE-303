@@ -60,13 +60,12 @@ C.handler_clickonsemaine = function(ev){
  
 
 C.handler_clickoncheckbox = function(ev){
-  let search = document.querySelector("#search");
 if(ev.target.checked){
-  let event = M.getEvents(ev.target.id)
+  let event = M.getEvents(ev.target.name)
   V.uicalendar.createEvents( event );
 }
 else if(  ev.target.checked == false){
-  V.uicalendar.setCalendarVisibility(ev.target.id, false);
+  V.uicalendar.setCalendarVisibility(ev.target.name, false);
 }
 };
 
@@ -77,10 +76,11 @@ else if(  ev.target.checked == false){
     // itération 5 
     C.handler_annee = function(ev){
       let select = document.getElementById("groupe");
+      console.log(ev.target.checked);
       for(let i = 0; i < select.options.length; i++){
         let option = select.options[i];
         let dataid = option.getAttribute("data-id");
-        if(dataid == "BUT1"){
+        if(dataid == ev.target.id){
           if(ev.target.checked){
             option.style.display = "block";
           }
@@ -91,9 +91,6 @@ else if(  ev.target.checked == false){
     }
     }
    
-   
-
-
 let test = function(){
   let select = document.getElementById("groupe");
   let groupe = select.value;
@@ -181,6 +178,7 @@ C.handler_disposition = function(ev) {
       break;
     case 'mois':
       V.uicalendar.changeView('month');
+      
       break;
   }
 };
