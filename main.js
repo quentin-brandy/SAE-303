@@ -76,7 +76,6 @@ else if(  ev.target.checked == false){
     // itération 5 
     C.handler_annee = function(ev){
       let select = document.getElementById("groupe");
-      console.log(ev.target.checked);
       for(let i = 0; i < select.options.length; i++){
         let option = select.options[i];
         let dataid = option.getAttribute("data-id");
@@ -91,16 +90,6 @@ else if(  ev.target.checked == false){
     }
     }
    
-let test = function(){
-  let select = document.getElementById("groupe");
-  let groupe = select.value;
-  console.log(groupe);
-  let events = M.getallevents();
-  console.log(events);
-  let filteredEvents = events.filter(event => event.groupe.includes(groupe));
-  console.log(filteredEvents);
-  return filteredEvents;
-  };
 
 C.handler_selectgroupe = function(ev){
 let groupe = ev.target.value;
@@ -124,8 +113,8 @@ else{
 let searchfonction = function(search){
   let value = search.value;
   let recherche = M.search2(value);
-  let groupe = test();
   let allevent = M.getallevents();
+  let groupe = V.Presentevent(allevent);
   if(value === "0"){
     let filteredsearch = allevent.filter(event =>  recherche.every(recherche => event.title.toLowerCase().includes(recherche) || event.location.toLowerCase().includes(recherche)));
     V.uicalendar.clear();
@@ -147,8 +136,8 @@ C.handler_search = function(ev){
   let select = document.getElementById("groupe");
   let value = select.value;
   let recherche = M.search(ev);
-  let groupe = test();
   let allevent = M.getallevents();
+  let groupe = V.Presentevent(allevent);
   if(value === "0"){
     let filteredsearch = allevent.filter(event =>  recherche.every(recherche => event.title.toLowerCase().includes(recherche) || event.location.toLowerCase().includes(recherche)));
     V.uicalendar.clear();
@@ -182,6 +171,13 @@ C.handler_disposition = function(ev) {
       break;
   }
 };
+
+// itération 9 
+
+if (window.devicePixelRatio > 2) {
+  V.uicalendar.changeView('day');
+}
+
 
 
 

@@ -61,5 +61,14 @@ V.searchfonction = function(search){
   }
 }
 
+
+V.Presentevent = function(events){
+  let select = document.getElementById("groupe");
+  let groupe = select.value;
+  let filteredEvents = events.filter(event => event.groupe.includes(groupe));
+  console.log(filteredEvents);
+  return filteredEvents;
+  };
+
 export { V };
 
