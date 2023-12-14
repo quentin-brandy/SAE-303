@@ -1,0 +1,274 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap');
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin-block-end: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+   scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+body{
+  background-color:#323232 ;
+}
+
+.nav{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  margin: 0 .2rem;
+  margin-top: 3rem;
+}
+
+.annee{
+  display: flex;
+  gap: 2rem;
+  padding: 0 1rem;
+}
+
+.changement{
+  z-index: 1;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem; 
+  margin-bottom: 3rem; 
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: bold;
+  font-family: 'Nunito', sans-serif;
+}
+
+.arrow__changement{
+background-color: #DDD0C8;
+padding: .3rem .7rem;
+border-radius: 100%;
+
+}
+
+.today__changement{
+background-color: #DDD0C8;
+padding: .3rem .7rem;
+border-radius: 10px;
+border: 3px solid #191818;
+}
+
+.disposition{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.disposition__changement{
+  padding: .5rem  .9rem;
+  color: #323232;
+  background-color: #DDD0C8;
+  border: 3px solid #191818;
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+
+.checkbox__annee{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #DDD0C8;
+
+}
+.checkbox__name{
+  display: contents;
+}
+
+.checkbox{
+  appearance: none;
+  background-color: #DDD0C8;
+  border: 3px solid #DDD0C8;
+  border-radius: 3rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  
+}
+
+.checkbox:checked{
+  background-color: #77655a;
+}
+.select{
+  display: flex;
+}
+.searchselect{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.select__groupe{
+appearance: none;
+color: #323232;
+background-color: #DDD0C8;
+width: fit-content;
+padding: .2rem 2rem;
+}
+.select__arrow{
+position: absolute;
+width: 2rem;
+height: 2rem;
+color: #323232;
+}
+
+.searchbar{
+  margin-bottom: 2rem;
+  background-color: #DDD0C8;
+  color: #323232;
+  border: none;
+}
+.allbtn{
+  display: flex;
+  flex-direction: column;
+}
+.arrowmenu{
+  margin: auto;
+  cursor: pointer;
+  padding: 1rem 0;
+}
+.toastui-calendar-week-view .toastui-calendar-panel:not(.toastui-calendar-time) {
+  overflow: hidden;
+}
+@media (min-width: 768px) {
+  
+  .nav{
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    margin: .3rem 0;
+    font-size: 1.2rem;
+  }
+  .annee{
+  gap: 1.5rem;
+  }
+  .searchselect{
+    padding-top: 2rem;
+  }
+  .arrowmenu{
+    display: none;
+  }
+}
+
+@media (min-width: 1440px) {
+.nav{
+  justify-content: space-around;
+  align-items: center;
+}
+  .annee{
+    font-size: 1.2rem;
+  }
+  .searchselect{
+    flex-direction: row;
+  }
+  .allbtn{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1.5rem;
+  font-size: 1.2rem;
+  
+  }
+  .changement{
+    gap: 1.5rem;
+    font-size: 1rem;
+    padding-right: 1rem;
+    font-size: 1.2rem;
+  }
+  .disposition{
+    padding-left: 0;
+    padding-right: 1rem;
+  }
+
+  .select__groupe{
+    font-size: 1.2rem;
+    height: 3rem;
+  }
+  .select__arrow{
+    height: 3rem;
+  }
+  .searchbar{
+    font-size: 1.2rem;
+    height: 3rem;
+  }
+  
+
+}

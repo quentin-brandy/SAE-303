@@ -3,48 +3,42 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MMI Calendar</title>
+    <title>MMI Calendar</title>  
+    <link href="style.css" rel="stylesheet" />
   </head>
   <body>
   
     <div>
       <header>
-        <nav id="semaine">
-         <button id="prev">
-          semaine dernière
-         </button>
-         <button id="today">
-          cette semaine
-         </button>
-         <button id="next">
-          semaine prochaine
-         </button>
-<div id="disposition">
-  <button id="day">
+        <nav class="nav" id="semaine">
+    <div class="disposition" id="disposition">
+    <button class="disposition__changement" id="day">
     jour
    </button>
-   <button id="week">
+   <button class="disposition__changement" id="week">
     semaine 
    </button>
-   <button id="month">
+   <button class="disposition__changement" id="month">
     mois
    </button>
 </div>
-         <div id="annees">
-         <div>
-          <input type="checkbox" id="BUT1" name="mmi1" checked />
-          <label for="mmi1">mmi1</label>
+         <div class="annee" id="annees">
+          <div class="checkbox__annee">
+          <input class="checkbox" type="checkbox" id="BUT1" name="mmi1" checked />
+          <p class="checkbox__name">mmi1</p>
         </div>
-        <div>
-          <input type="checkbox" id="BUT2" name="mmi2" checked />
-          <label for="mmi2">mmi2</label>
+          <div class="checkbox__annee">
+          <input class="checkbox" type="checkbox" id="BUT2" name="mmi2" checked />
+          <p class="checkbox__name">mmi2</p>
         </div>
-        <div>
-          <input type="checkbox" id="BUT3" name="mmi3" checked />
-          <label for="mmi3">mmi3</label>
+          <div class="checkbox__annee">
+          <input class="checkbox" type="checkbox" id="BUT3" name="mmi3" checked />
+          <p class="checkbox__name">mmi3</p>
         </div>
       </div>
-      <select name="groupe" id="groupe">
+      <div class="searchselect">
+      <div class="select">
+      <select class="select__groupe" name="groupe" id="groupe">
         <option data-id="0" value="0">Touts les groupes</option>
         <option data-id="BUT1" value="BUT1-G1">BUT1-G1</option>
         <option data-id="BUT1" value="BUT1-G21">BUT1-G21</option>
@@ -59,13 +53,21 @@
         <option data-id="BUT3" value="BUT3-G2">BUT3-G2</option>
         <option data-id="BUT3" value="BUT3-G3">BUT3-G3</option>
       </select>
-
-      <div class="fr-search-bar" id="header-search" role="search">
-        <input class="fr-input" placeholder="Rechercher"  type="search" id="search" name="search">
+      <img class="select__arrow" src="asset/Arrow-down.svg" alt="">
+    </div>
+      <div class="search" id="header-search" role="search">
+        <input class="searchbar" placeholder="Rechercher"  type="search" id="search" name="search">
+      </div>
      </div>
         </nav>
       </header>
-
+      <img class="arrowmenu" id="menumobile" src="asset/186407_arrow_up_icon.svg" alt="fleche menu ">
+      <div class="changement" id="changement">
+         <p class="arrow__changement" id="prev"> &#60; </p>
+         <p class="today__changement" id="today"> aujourd'hui </p>
+       <p class="arrow__changement" id="next">&#62;</p>
+       </div>
+       
       <main id="calendar" style="height: 800px"></main>
     </div>
 

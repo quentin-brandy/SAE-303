@@ -22,7 +22,7 @@ await M.init();
 // creating events in the calendar
 
 V.init = function(){
-  let semaine = document.querySelector('#semaine');
+  let semaine = document.querySelector('#changement');
   semaine.addEventListener('click' , C.handler_clickonsemaine);
 
   let année = document.querySelector("#annees");
@@ -39,6 +39,12 @@ V.init = function(){
 
   let dispo = document.getElementById('disposition')
   dispo.addEventListener('click', C.handler_disposition); 
+
+  let menuburger = document.querySelector("#menumobile");
+  menuburger.addEventListener('click', C.handlerclickonmenu);
+
+  let cat = localStorage.getItem("filtre");
+  C.localselect({target:{value: cat }})
 }
 
 let C = {}
@@ -97,10 +103,10 @@ localStorage.setItem(ev.target.name, ev.target.checked);
     }
    
 // handler pour la séléction des optionsa afficher dans le sélécteur ainsi qu ecréation des évènements à afficher en fonction du sélécteur
-C.handler_selectgroupe = function(){
+C.handler_selectgroupe = function(ev){
 let mmi = [document.querySelector("#BUT1") , document.querySelector("#BUT2") , document.querySelector("#BUT3") ];
 let select = document.getElementById("groupe");
-let groupe = select.value;
+let groupe = ev.target.value;
 V.checked(groupe);
 let events = M.getallevents();
 let filteredEvents = events.filter(event => event.groupe.includes(groupe));
@@ -124,7 +130,7 @@ if(groupe =="0"){
 }
 }
 else{
- searchfonction(search);
+ C.handler_search({target:{value:search.value}});
   }
   localStorage.setItem("filtre", groupe);
 };
@@ -134,6 +140,7 @@ else{
 C.handler_search = function(ev){
   let select = document.getElementById("groupe");
   let value = select.value;
+  console.log(ev.target.value);
   let recherche = M.search(ev);
   let allevent = M.getallevents();
   let groupe = V.Presentevent(allevent);
@@ -155,41 +162,35 @@ C.handler_search = function(ev){
 // handler pour changer  la vue
 
 C.handler_disposition = function(ev) {
-  let button = ev.target;
-  let id = button.id;
+  let button = ev.target.id;
+  
+  V.uicalendar.changeView(button);
 
-  switch (id) {
-    case 'day':
-      V.uicalendar.changeView('day');
-      break;
-    case 'week':
-      V.uicalendar.changeView('week');
-      break;
-    case 'month':
-      V.uicalendar.changeView('month');
-      break;
-  }
-  localStorage.setItem("format", id);
+  localStorage.setItem("format", button);
 };
 
 // itération 9 
 // version men jour pour mobile
-if (window.devicePixelRatio > 2) {
-  V.uicalendar.changeView('day');
-}
+let mediaQuery = window.matchMedia('(max-width: 768px)') ;
+  mediaQuery.addEventListener('change' , () => {
+    if (mediaQuery.matches){
+      V.uicalendar.changeView('day');
+    } else {
+      V.uicalendar.changeView('week');
+    }
+  })
 
 
 // itération 10 
 
 // établissement des evènements a affiché en fonction du sélécteur d'après le localstorage
-let selectandformatidentifier = function() {
+C.localselect = function(ev) {
 let select = document.getElementById("groupe");
-let cat = localStorage.getItem("filtre");
 for (let i = 1; i < select.options.length; i++) {
   let option = select.options[i];
-  if (option.value == cat) {
+  if (option.value == ev.target.value) {
     option.selected = true;
-    C.handler_selectgroupe();
+    C.handler_selectgroupe(ev);
     break;
     
   }
@@ -197,27 +198,6 @@ for (let i = 1; i < select.options.length; i++) {
 let format = localStorage.getItem("format");
 V.uicalendar.changeView(format);
 }
-
-
-// Fonction de recherche d'évènements
-let searchfonction = function(search){
-  let value = search.value;
-  let recherche = M.search2(value);
-  let allevent = M.getallevents();
-  let groupe = V.Presentevent(allevent);
-  if(value === "0"){
-    let filteredsearch = allevent.filter(event =>  recherche.every(recherche => event.title.toLowerCase().includes(recherche) || event.location.toLowerCase().includes(recherche)));
-    V.uicalendar.clear();
-    V.uicalendar.createEvents(filteredsearch);
-  }
-  else{
-  let filteredsearch = groupe.filter(event =>  recherche.every(recherche => event.title.toLowerCase().includes(recherche) || event.location.toLowerCase().includes(recherche)));
-  V.uicalendar.clear();
-  V.uicalendar.createEvents(filteredsearch);
-  }
-}
-
-
 
 
 // établissement de la valeur des checkbox d'après le localstorage
@@ -253,11 +233,24 @@ if (select.value === "0") {
 }
 
 
-let preference = function(){
-  checkboxvalue();
-  selectandformatidentifier();
-};
+// menu burger
+C.handlerclickonmenu = function(){
+  let btn = document.querySelector(".arrowmenu");
+  let nav = document.querySelector(".nav");
+  console.log(nav.style);
+  if(nav.style.position === "" || nav.style.position === "static"){
+    nav.style.opacity = "0";
+    nav.style.position = "absolute";
+    btn.style.transform = "rotate(180deg)";
+  
+  }
+  else{
+    nav.style.opacity = "1";
+    nav.style.position = "static";
+    btn.style.transform = "rotate(0deg)";
+  }
+}
 
 
 V.init();
-preference();
+checkboxvalue();
