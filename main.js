@@ -48,6 +48,7 @@ V.init = function(){
 
   let cat = localStorage.getItem("filtre");
   C.localselect({target:{value: cat }})
+V.view();
 }
 
 let C = {}
@@ -166,10 +167,15 @@ C.handler_search = function(ev){
 
 C.handler_disposition = function(ev) {
   let button = ev.target.id;
-  
-  V.uicalendar.changeView(button);
+  if(button === "disposition"){
 
-  localStorage.setItem("format", button);
+  }
+  else{
+    V.uicalendar.changeView(button);
+
+    localStorage.setItem("format", button);
+  }
+ 
 };
 
 // itération 9 
@@ -232,6 +238,8 @@ if (select.value === "0") {
     V.localevent(mmi1event , mmi2event , mmi3event);
   
 }
+
+
 }
 
 
