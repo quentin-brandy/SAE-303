@@ -46,7 +46,6 @@ V.init = function () {
   let cat = localStorage.getItem("filtre");
   C.localselect({ target: { value: cat } });
   
-  V.view();
 
   
 };
@@ -196,7 +195,12 @@ C.localselect = function (ev) {
     }
   }
   let format = localStorage.getItem("format");
+  if(format === null){
+    V.view();
+  }
+  else{
   V.uicalendar.changeView(format);
+  }
 };
 
 // établissement de la valeur des checkbox d'après le localstorage
