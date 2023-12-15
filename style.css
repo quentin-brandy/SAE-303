@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap");
 /* Box sizing rules */
 *,
 *::before,
@@ -21,8 +21,8 @@ dd {
 }
 
 /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
-ul[role='list'],
-ol[role='list'] {
+ul[role="list"],
+ol[role="list"] {
   list-style: none;
 }
 
@@ -61,9 +61,9 @@ select {
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
   html:focus-within {
-   scroll-behavior: auto;
+    scroll-behavior: auto;
   }
-  
+
   *,
   *::before,
   *::after {
@@ -73,31 +73,31 @@ select {
     scroll-behavior: auto !important;
   }
 }
-body{
-  background-color:#323232 ;
+body {
+  background-color: #323232;
 }
 
-.nav{
+.nav {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   font-weight: 700;
-  margin: 0 .2rem;
+  margin: 0 0.2rem;
   margin-top: 3rem;
 }
-.nav__burger{
+.nav__burger {
   opacity: 0;
   position: absolute;
 }
-.annee{
+.annee {
   display: flex;
   gap: 2rem;
   padding: 0 1rem;
 }
 
-.changement{
+.changement {
   z-index: 1;
   position: fixed;
   bottom: 0;
@@ -105,64 +105,62 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2rem; 
-  margin-bottom: 3rem; 
+  gap: 2rem;
+  margin-bottom: 3rem;
   cursor: pointer;
   font-size: 1.1rem;
   font-weight: bold;
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   user-select: none;
 }
 
-.arrow__changement{
-background-color: #DDD0C8;
-padding: .3rem .7rem;
-border-radius: 100%;
-margin-top: 1rem;
+.arrow__changement {
+  background-color: #ddd0c8;
+  padding: 0.3rem 0.7rem;
+  border-radius: 100%;
+  margin-top: 1rem;
 }
-.arrow__changement:nth-child(3){
+.arrow__changement:nth-child(3) {
   transform: rotate(180deg);
-  }
-.today__changement{
-background-color: #DDD0C8;
-padding: .3rem .7rem;
-border-radius: 10px;
-border: 3px solid #191818;
+}
+.today__changement {
+  background-color: #ddd0c8;
+  padding: 0.3rem 0.7rem;
+  border-radius: 10px;
+  border: 3px solid #191818;
 }
 
-.disposition{
+.disposition {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 2rem;
 }
 
-.disposition__changement{
-  padding: .5rem  .9rem;
+.disposition__changement {
+  padding: 0.5rem 0.9rem;
   color: #323232;
-  background-color: #DDD0C8;
-  border: 3px solid #191818 ;
+  background-color: #ddd0c8;
+  border: 3px solid #191818;
   border-radius: 8px;
   font-weight: 700;
   cursor: pointer;
 }
 
-
-.checkbox__annee{
+.checkbox__annee {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #DDD0C8;
-
+  color: #ddd0c8;
 }
-.checkbox__name{
+.checkbox__name {
   display: contents;
 }
 
-.checkbox{
+.checkbox {
   appearance: none;
-  background-color: #DDD0C8;
-  border: 3px solid #DDD0C8;
+  background-color: #ddd0c8;
+  border: 3px solid #ddd0c8;
   border-radius: 3rem;
   width: 2.5rem;
   height: 2.5rem;
@@ -170,49 +168,49 @@ border: 3px solid #191818;
 }
 
 .check1:checked {
-  background-color: #428BCA;
+  background-color: #428bca;
 }
 .check2:checked {
-  background-color: #C39BD3;
+  background-color: #c39bd3;
 }
 .check3:checked {
-  background-color: #99D3BD;
+  background-color: #99d3bd;
 }
 
-.select{
+.select {
   display: flex;
 }
-.searchselect{
+.searchselect {
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
 
-.select__groupe{
-appearance: none;
-color: #323232;
-background-color: #DDD0C8;
-width: fit-content;
-padding: .2rem 2rem;
+.select__groupe {
+  appearance: none;
+  color: #323232;
+  background-color: #ddd0c8;
+  width: fit-content;
+  padding: 0.2rem 2rem;
 }
-.select__arrow{
-position: absolute;
-width: 2rem;
-height: 2rem;
-color: #323232;
+.select__arrow {
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  color: #323232;
 }
 
-.searchbar{
+.searchbar {
   margin-bottom: 2rem;
-  background-color: #DDD0C8;
+  background-color: #ddd0c8;
   color: #323232;
   border: none;
 }
-.allbtn{
+.allbtn {
   display: flex;
   flex-direction: column;
 }
-.arrowmenu{
+.arrowmenu {
   margin: auto;
   cursor: pointer;
   padding: 1rem 0;
@@ -220,85 +218,84 @@ color: #323232;
 .toastui-calendar-panel:not(.toastui-calendar-time) {
   overflow-y: hidden;
 }
-.arrowmenu__close{
+.arrowmenu__close {
   display: none;
 }
-.arrowmenu__open{
+.arrowmenu__open {
   display: none;
   transform: rotate(180deg);
 }
+.label {
+  user-select: none;
+  color: #323232;
+}
 @media (min-width: 768px) {
-  
-  .nav{
+  .nav {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     overflow: hidden;
-    margin: .3rem 0;
+    margin: 0.3rem 0;
     font-size: 1.2rem;
-    
   }
-  .nav__burger{
-    opacity : 1;
-    position : static;
+  .nav__burger {
+    opacity: 1;
+    position: static;
   }
-  .annee{
-  gap: 1.5rem;
+  .annee {
+    gap: 1.5rem;
   }
-  .searchselect{
+  .searchselect {
     padding-top: 2rem;
   }
-  .arrowmenu{
+  .arrowmenu {
     display: none;
   }
-  .menucommand{
+  .menucommand {
     display: none;
   }
 }
 
 @media (min-width: 1440px) {
-.nav{
-  justify-content: space-around;
-  align-items: center;
-}
-  .annee{
+  .nav {
+    justify-content: space-around;
+    align-items: center;
+  }
+  .annee {
     font-size: 1.2rem;
   }
-  .searchselect{
+  .searchselect {
     flex-direction: row;
   }
-  .allbtn{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 1.5rem;
-  font-size: 1.2rem;
-  
+  .allbtn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1.5rem;
+    font-size: 1.2rem;
   }
-  .changement{
+  .changement {
     gap: 1.5rem;
     font-size: 1rem;
     padding-right: 1rem;
     font-size: 1.2rem;
   }
-  .disposition{
+  .disposition {
     padding-left: 0;
     padding-right: 1rem;
   }
 
-  .select__groupe{
+  .select__groupe {
     font-size: 1.2rem;
     height: 3rem;
   }
-  .select__arrow{
+  .select__arrow {
     height: 3rem;
   }
-  .searchbar{
+  .searchbar {
     font-size: 1.2rem;
     height: 3rem;
   }
-  
-
 }
