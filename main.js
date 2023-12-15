@@ -43,10 +43,12 @@ V.init = function () {
   let closemenuburger = document.querySelector("#menumobile2");
   closemenuburger.addEventListener("click", C.handlerclickclosemenu);
 
-  V.view();
-
   let cat = localStorage.getItem("filtre");
   C.localselect({ target: { value: cat } });
+  
+  V.view();
+
+  
 };
 
 let C = {};
