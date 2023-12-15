@@ -11,22 +11,22 @@ class Event {
     #year;
     #calendarColours = {
         mmi1: {
-          CM: "#6b66ff",
-          TD: "#0800e0",
-          TP: "#050093",
-          Default: "#9c99ff",
+          CM: " #3680B7",
+          TD: "#3A84B8",
+          TP: "#3E88B9",
+          Default: " #428BCA",
         },
         mmi2: {
-          CM: "#13fa00",
-          TD: "#13b800",
-          TP: "#095800",
-          Default: "#6dff61",
+          CM: "#BA8ED0",
+          TD: "#BD93D1",
+          TP: "#C098D2",
+          Default: "#C39BD3",
         },
         mmi3: {
-          CM: "#ff1d0a",
-          TD: "#d11000",
-          TP: "#8d0b00",
-          Default: "#ff6457",
+          CM: "#90CAB8",
+          TD: "#93CDB9",
+          TP: "#96D0BA",
+          Default: "#99D3BD",
         },
       };
 

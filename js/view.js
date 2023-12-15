@@ -105,5 +105,14 @@ V.Presentevent = function(events){
     V.uicalendar.createEvents(event);
   }
 }
+
+V.view = function(){
+  let mediaQuery = window.matchMedia('(max-width: 768px)') ;
+    if (mediaQuery.matches){
+      V.uicalendar.changeView('day');
+    } else {
+      V.uicalendar.changeView('week');
+    }
+  }
 export { V };
 
