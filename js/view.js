@@ -28,8 +28,7 @@ V.uicalendar = new Calendar('#calendar', {
     eventView: ['time'],
   },
   day: {
-    startDayOfWeek: 1,
-    dayNames: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+    dayNames: [ 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', ],
     workweek: true,
     hourStart: 8,
     hourEnd: 20,
@@ -38,8 +37,16 @@ V.uicalendar = new Calendar('#calendar', {
   },
   template: {
     time: function(event) {
-      return `<span style="color: white;">${event.title}</span>`;
+      return `<span style="color: #210000; font-family: 'Nunito', sans-serif; font-weight: bold;">${event.title}</span>`;
     }
+    
+  },
+ 
+});
+V.uicalendar.setTheme({
+  common: {
+    backgroundColor: 'white',
+    
   },
  
 });

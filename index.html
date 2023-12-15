@@ -1,81 +1,120 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MMI Calendar</title>  
+    <title>MMI Calendar</title>
     <link href="style.css" rel="stylesheet" />
   </head>
   <body>
-  
     <div>
       <header>
         <nav class="nav" id="semaine">
-    <div class="disposition" id="disposition">
-    <button class="disposition__changement" id="day">
-    jour
-   </button>
-   <button class="disposition__changement" id="week">
-    semaine 
-   </button>
-   <button class="disposition__changement" id="month">
-    mois
-   </button>
-</div>
-         <div class="annee" id="annees">
-          <div class="checkbox__annee">
-          <input class="checkbox check1" data-id="check1" type="checkbox" id="BUT1" name="mmi1" checked />
-          <p class="checkbox__name">mmi1</p>
-        </div>
-          <div class="checkbox__annee">
-          <input class="checkbox check2" data-id="check2" type="checkbox" id="BUT2" name="mmi2" checked />
-          <p class="checkbox__name">mmi2</p>
-        </div>
-          <div class="checkbox__annee">
-          <input class="checkbox check3" data-id="check3" type="checkbox" id="BUT3" name="mmi3" checked />
-          <p class="checkbox__name">mmi3</p>
-        </div>
-      </div>
-      <div class="searchselect">
-      <div class="select">
-      <select class="select__groupe" name="groupe" id="groupe">
-        <option data-id="0" value="0">Touts les groupes</option>
-        <option data-id="BUT1" value="BUT1-G1">BUT1-G1</option>
-        <option data-id="BUT1" value="BUT1-G21">BUT1-G21</option>
-        <option data-id="BUT1" value="BUT1-G22">BUT1-G22</option>
-        <option data-id="BUT1" value="BUT1-G3">BUT1-G3</option>
-        <option data-id="BUT1" value="BUT1-G4">BUT1-G4</option>
-        <option data-id="BUT2" value="BUT2-G1">BUT2-G1</option>
-        <option data-id="BUT2" value="BUT2-G21">BUT2-G21</option>
-        <option data-id="BUT2" value="BUT2-G22">BUT2-G22</option>
-        <option data-id="BUT2" value="BUT2-G3">BUT2-G3</option>
-        <option data-id="BUT3" value="BUT3-G1">BUT3-G1</option>
-        <option data-id="BUT3" value="BUT3-G2">BUT3-G2</option>
-        <option data-id="BUT3" value="BUT3-G3">BUT3-G3</option>
-      </select>
-      <img class="select__arrow" src="asset/Arrow-down.svg" alt="">
-    </div>
-      <div class="search" id="header-search" role="search">
-        <input class="searchbar" placeholder="Rechercher"  type="search" id="search" name="search">
-      </div>
-     </div>
+          <div class="disposition" id="disposition">
+            <button class="disposition__changement" id="day">jour</button>
+            <button class="disposition__changement" id="week">semaine</button>
+            <button class="disposition__changement" id="month">mois</button>
+          </div>
+          <div class="annee" id="annees">
+            <div class="checkbox__annee">
+              <input
+                class="checkbox check1"
+                data-id="check1"
+                type="checkbox"
+                id="BUT1"
+                name="mmi1"
+                checked
+              />
+              <p class="checkbox__name">mmi1</p>
+            </div>
+            <div class="checkbox__annee">
+              <input
+                class="checkbox check2"
+                data-id="check2"
+                type="checkbox"
+                id="BUT2"
+                name="mmi2"
+                checked
+              />
+              <p class="checkbox__name">mmi2</p>
+            </div>
+            <div class="checkbox__annee">
+              <input
+                class="checkbox check3"
+                data-id="check3"
+                type="checkbox"
+                id="BUT3"
+                name="mmi3"
+                checked
+              />
+              <p class="checkbox__name">mmi3</p>
+            </div>
+          </div>
+          <div class="searchselect">
+            <div class="select">
+              <select class="select__groupe" name="groupe" id="groupe">
+                <option data-id="0" value="0">Touts les groupes</option>
+                <option data-id="BUT1" value="BUT1-G1">BUT1-G1</option>
+                <option data-id="BUT1" value="BUT1-G21">BUT1-G21</option>
+                <option data-id="BUT1" value="BUT1-G22">BUT1-G22</option>
+                <option data-id="BUT1" value="BUT1-G3">BUT1-G3</option>
+                <option data-id="BUT1" value="BUT1-G4">BUT1-G4</option>
+                <option data-id="BUT2" value="BUT2-G1">BUT2-G1</option>
+                <option data-id="BUT2" value="BUT2-G21">BUT2-G21</option>
+                <option data-id="BUT2" value="BUT2-G22">BUT2-G22</option>
+                <option data-id="BUT2" value="BUT2-G3">BUT2-G3</option>
+                <option data-id="BUT3" value="BUT3-G1">BUT3-G1</option>
+                <option data-id="BUT3" value="BUT3-G2">BUT3-G2</option>
+                <option data-id="BUT3" value="BUT3-G3">BUT3-G3</option>
+              </select>
+              <img class="select__arrow" src="asset/Arrow-down.svg" alt="" />
+            </div>
+            <div class="search" id="header-search" role="search">
+              <input
+                class="searchbar"
+                placeholder="Rechercher"
+                type="search"
+                id="search"
+                name="search"
+              />
+            </div>
+          </div>
         </nav>
         <div class="menucommand">
-        <img class="arrowmenu " id="menumobile" src="asset/186407_arrow_up_icon.svg" alt="fleche menu ">
-      <img class="arrowmenu arrowmenu__open" id="menumobile2" src="asset/186407_arrow_up_icon.svg" alt="fleche menu ">
-    </div>
+          <img
+            class="arrowmenu"
+            id="menumobile"
+            src="asset/186407_arrow_up_icon.svg"
+            alt="fleche menu "
+          />
+          <img
+            class="arrowmenu arrowmenu__open"
+            id="menumobile2"
+            src="asset/186407_arrow_up_icon.svg"
+            alt="fleche menu "
+          />
+        </div>
       </header>
-      
+
       <div class="changement" id="changement">
-        <img src="asset/383101_arrow_left_nav_icon.svg" class="arrow__changement" id="prev" alt="fleche gauche">
-         <p class="today__changement" id="today"> aujourd'hui </p>
-        <img src="asset/383101_arrow_left_nav_icon.svg" class="arrow__changement" id="next" alt="fleche gauche">
-       </div>
-       
+        <img
+          src="asset/383101_arrow_left_nav_icon.svg"
+          class="arrow__changement"
+          id="prev"
+          alt="fleche gauche"
+        />
+        <p class="today__changement" id="today">aujourd'hui</p>
+        <img
+          src="asset/383101_arrow_left_nav_icon.svg"
+          class="arrow__changement"
+          id="next"
+          alt="fleche gauche"
+        />
+      </div>
+
       <main id="calendar" style="height: 800px"></main>
     </div>
 
     <script type="module" src="main.js"></script>
-    
   </body>
 </html>
