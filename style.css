@@ -87,7 +87,10 @@ body{
   margin: 0 .2rem;
   margin-top: 3rem;
 }
-
+.nav__burger{
+  opacity: 0;
+  position: absolute;
+}
 .annee{
   display: flex;
   gap: 2rem;
@@ -159,7 +162,7 @@ border: 3px solid #191818;
   border-radius: 3rem;
   width: 2.5rem;
   height: 2.5rem;
-  
+  cursor: pointer;
 }
 
 .checkbox:checked{
@@ -203,18 +206,31 @@ color: #323232;
   cursor: pointer;
   padding: 1rem 0;
 }
-.toastui-calendar-week-view .toastui-calendar-panel:not(.toastui-calendar-time) {
-  overflow: hidden;
+.toastui-calendar-panel:not(.toastui-calendar-time) {
+  overflow-y: hidden;
+}
+.arrowmenu__close{
+  display: none;
+}
+.arrowmenu__open{
+  display: none;
+  transform: rotate(180deg);
 }
 @media (min-width: 768px) {
   
   .nav{
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     overflow: hidden;
     margin: .3rem 0;
     font-size: 1.2rem;
+    
+  }
+  .nav__burger{
+    opacity : 1;
+    position : static;
   }
   .annee{
   gap: 1.5rem;

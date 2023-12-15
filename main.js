@@ -40,8 +40,11 @@ V.init = function(){
   let dispo = document.getElementById('disposition')
   dispo.addEventListener('click', C.handler_disposition); 
 
-  let menuburger = document.querySelector("#menumobile");
-  menuburger.addEventListener('click', C.handlerclickonmenu);
+  let openmenuburger = document.querySelector("#menumobile");
+  openmenuburger.addEventListener('click', C.handlerclickopenmenu);
+
+  let closemenuburger = document.querySelector("#menumobile2");
+  closemenuburger.addEventListener('click', C.handlerclickclosemenu);
 
   let cat = localStorage.getItem("filtre");
   C.localselect({target:{value: cat }})
@@ -180,7 +183,6 @@ let mediaQuery = window.matchMedia('(max-width: 768px)') ;
     }
   })
 
-
 // itération 10 
 
 // établissement des evènements a affiché en fonction du sélécteur d'après le localstorage
@@ -234,23 +236,27 @@ if (select.value === "0") {
 
 
 // menu burger
-C.handlerclickonmenu = function(){
-  let btn = document.querySelector(".arrowmenu");
+C.handlerclickopenmenu = function(){
+  let btnclose = document.querySelector("#menumobile");
+  let btnopen = document.querySelector("#menumobile2");
   let nav = document.querySelector(".nav");
-  console.log(nav.style);
   if(nav.style.position === "" || nav.style.position === "static"){
-    nav.style.opacity = "0";
-    nav.style.position = "absolute";
-    btn.style.transform = "rotate(180deg)";
+    nav.classList.add("nav__burger");
+    btnclose.classList.add("arrowmenu__close");
+    btnopen.style.display = "block";
+  }
   
-  }
-  else{
-    nav.style.opacity = "1";
-    nav.style.position = "static";
-    btn.style.transform = "rotate(0deg)";
-  }
 }
-
+C.handlerclickclosemenu = function() {
+  let btnclose = document.querySelector("#menumobile");
+  let btnopen = document.querySelector("#menumobile2");
+  let nav = document.querySelector(".nav");
+  if(nav.classList.contains("nav__burger")){
+    nav.classList.remove("nav__burger");
+    btnclose.classList.remove("arrowmenu__close");
+    btnopen.style.display = "none";
+  }
+};
 
 V.init();
 checkboxvalue();
